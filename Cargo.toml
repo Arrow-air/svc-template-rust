@@ -1,5 +1,5 @@
 [package]
-name = "svc-template-rust"
+name = "svc_template_rust"
 version = "0.1.0"
 edition = "2021" # Allowed values are 2015, 2018, 2021
 # Rust Editions: https://doc.rust-lang.org/edition-guide/index.html
@@ -13,3 +13,7 @@ cargo-husky = "1"
 version = "1"
 default-features = false # Disable features which are enabled by default
 features = ["user-hooks"]
+
+[lib]
+name = "tmp_lib"
+path = "src/tmp_lib.rs"

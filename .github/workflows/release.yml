@@ -52,10 +52,8 @@ jobs:
           then
             echo "CUSTOM_RELEASE_RULES=fix:prerelease,feat:prerelease,chore:prerelease" >> $GITHUB_ENV
             echo "RELEASE_COMMIT_MESSAGE=fixup! ci: update release files\n\n[skip ci]" >> $GITHUB_ENV
-            echo "LATEST_TAG=latest-${GITHUB_REF_NAME}" >> $GITHUB_ENV
           else
             echo "RELEASE_COMMIT_MESSAGE=ci: update release files\n\n[skip ci]" >> $GITHUB_ENV
-            echo "LATEST_TAG=latest" >> $GITHUB_ENV
           fi
 
       - name: Determine new Tag
@@ -137,12 +135,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           custom_tag: ${{ steps.tag_version.outputs.new_version }}
           commit_sha: ${{ env.COMMIT_SHA }}
-
-      - name: Move "latest" Tag to current sha
-        continue-on-error: true
-        run: |
-          git tag -f ${{ env.LATEST_TAG }}
-          git push -f --tags
 
       - name: Generate Changelog base on new tag
         id: changelog_release
